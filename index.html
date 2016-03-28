@@ -1,9 +1,30 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> </title>
+    <title>User Registration</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta charset="UTF-8">
+    <script src="js/javascript.js"></script>
     </head>
+    
     <body>
-
+    
+    <h1 id="title">CREATE AN ANCCOUNT</h1>
+    
+    <form name="Form" onsubmit="return validateForm()">
+        *First Name<br>
+        <input type="text" name="firstname" id="firstname"><br>
+        *Last Name<br>
+        <input type="text" name="lastname" id="lastname"><br>
+        *Email Address<br>
+        <input type="email" name="email" id="email"><br>
+        *Password<br>
+        <input type="password" name="pw" id="pass1"><br>
+        *Confirm Password<br>
+        <input type="password" name="pw2" id="pass2"><br>
+        <br>
+        <input type="submit" value="CREATE ACCOUNT">
+    </form>
+        
     </body>
 </html>
