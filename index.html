@@ -5,13 +5,15 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta charset="UTF-8">
     <script src="js/javascript.js"></script>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     </head>
     
     <body>
     
     <h1 id="title">CREATE AN ANCCOUNT</h1>
     
-    <form name="Form" onsubmit="return validateForm()">
+    <form name="Form" onsubmit="return validateForm()" action="javascript:saveToDB();">
         *First Name<br>
         <input type="text" name="firstname" id="firstname"><br>
         *Last Name<br>
@@ -23,8 +25,38 @@
         *Confirm Password<br>
         <input type="password" name="pw2" id="pass2"><br>
         <br>
-        <input type="submit" value="CREATE ACCOUNT">
+        <input type="submit" value="CREATE ACCOUNT" id="submitBtn">
+        
+        <div id='messagesDiv'></div>
     </form>
+        
+    <script>
+        function saveToDB(){
+            var myDataRef = new Firebase("https://torrid-torch-6617.firebaseio.com/");
+            
+            var fname = document.getElementById("firstname").value;
+            var lname = document.getElementById("lastname").value;
+            var email = document.getElementById("email").value;
+            var pw = document.getElementById("pass1").value;
+            
+            var isValidEmail = true;
+            myDataRef.on('child_added', function(snapshot) {
+                var message = snapshot.val();
+                if(message.email == email){
+                    isValidEmail = false;
+                }
+            });
+            
+            if(isValidEmail){
+                myDataRef.push({firstname: fname, lastname: lname, email: email, password: pw});
+                alert("Success register!");
+            }else{
+                alert("Email is already EXIST! Please use another Email!");
+            }
+        }
+        
+
+    </script>
         
     </body>
 </html>
