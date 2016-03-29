@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta charset="UTF-8">
     <script src="js/javascript.js"></script>
+    <script src="js/showResult.js"></script>
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     </head>
@@ -30,6 +31,14 @@
         <div id='messagesDiv'></div>
     </form>
         
+    <div id="remindData" hidden>
+        THANK YOU FOR REGISTRATION!<br>
+        <b>please remember your information for further login!</b>
+        <br><br>
+        <div id="showEmail"></div>
+        <div id="showPW"></div>
+    </div>
+        
     <script>
         function saveToDB(){
             var myDataRef = new Firebase("https://torrid-torch-6617.firebaseio.com/");
@@ -50,6 +59,8 @@
             if(isValidEmail){
                 myDataRef.push({firstname: fname, lastname: lname, email: email, password: pw});
                 alert("Success register!");
+                scrollWin();
+                showData();
             }else{
                 alert("Email is already EXIST! Please use another Email!");
             }
